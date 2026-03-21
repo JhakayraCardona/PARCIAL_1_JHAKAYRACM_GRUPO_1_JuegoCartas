@@ -51,9 +51,10 @@ public class FrmJuego extends JFrame {
          * }
          * });
          */
-
+   
         btnVerificar.addActionListener(e -> {
-            verificar();
+           verificar();  
+
         });
     }
 
@@ -68,10 +69,17 @@ public class FrmJuego extends JFrame {
 
     private void verificar() {
         if (tpJugadores.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, jugador1.getGrupos());
+            JOptionPane.showMessageDialog(null, jugador1.getGrupos()+ "\n\n" +
+                jugador1.getEscaleras() + "\n\n" +
+                "Puntaje: " + jugador1.getPuntaje());
         } else {
-            JOptionPane.showMessageDialog(null, jugador2.getGrupos());
+            JOptionPane.showMessageDialog(null, jugador2.getGrupos()+ "\n\n" +
+                jugador2.getEscaleras() + "\n\n" +
+                "Puntaje: " + jugador2.getPuntaje());
         }
     }
+
+
+
 
 }

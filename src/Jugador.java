@@ -45,4 +45,68 @@ public class Jugador {
 
         return resultado.isEmpty() ? "No se encontraron grupos" : "Se encontraron los siguientes grupos:\n" + resultado;
     }
+    
+    public String getEscaleras() {
+        String resultado = "";
+
+        for (Pinta p : Pinta.values()) {
+            boolean valores[] = new boolean[NombreCarta.values().length];
+
+            for (Carta carta : cartas)
+                if (carta.getPinta() == p)
+                    valores[carta.getNombre().ordinal()] = true;
+            
+        
+            int contador = 0;
+
+            for (int i = 0; i <= valores.length; i++) {
+                if (i < valores.length && valores[i]) {
+                    contador++;
+                } else {
+                    if (contador >= 2)
+                        resultado += Grupo.values()[contador] + " en escalera de " + p + "\n";
+
+                    contador = 0;
+                }
+            }
+    
+        }
+        return resultado.isEmpty() ? "No se encontraron escaleras" : resultado;
+    }
+
+
+
+   public int getPuntaje() {
+    int puntaje = 0;
+
+    int[] contadores = new int[NombreCarta.values().length];
+
+    
+    for (Carta carta : cartas) {
+        contadores[carta.getNombre().ordinal()]++;
+    }
+
+    
+    for (Carta carta : cartas) {
+
+        NombreCarta nombre = carta.getNombre();
+        int cantidad = contadores[nombre.ordinal()];
+
+        
+        if (cantidad < 2) {
+
+            if (nombre == NombreCarta.AS ||
+                nombre == NombreCarta.JACK ||
+                nombre == NombreCarta.QUEEN ||
+                nombre == NombreCarta.KING) {
+
+                puntaje += 10;
+
+            } else {
+                puntaje += nombre.ordinal() + 1;
+            }
+        }
+    }
+    return puntaje;
+}
 }
